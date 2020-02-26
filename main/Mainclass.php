@@ -33,19 +33,23 @@ class Mainclass
             $count = $user->getCount();
             $user->incCount($count);
             $this->setPage('login.php');
+            header("Location: /index.php"); die();
         }
         if ($_POST['login']=='1') {
             $user = new User();
             $user->login($_POST);
             $this->setPage('login.php');
+            header("Location: /index.php"); die();
         }
         if ($_POST['register']=='2') {
             $this->setPage('form2.php');
+            header("Location: /index.php"); die();
         }
         if ($_POST['register']=='1' || $this->userin) {
             $user = new User();
             $user->register($_POST);
             $this->setPage('login.php');
+            header("Location: /index.php"); die();
         }
         if ($_POST['logout']=='1') {
             unset($_SESSION['userid']);
