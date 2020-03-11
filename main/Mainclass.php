@@ -43,7 +43,7 @@ class Mainclass
         }
         if ($_POST['register']=='2') {
             $this->setPage('form2.php');
-            header("Location: /index.php"); die();
+            //header("Location: /index.php"); die();
         }
         if ($_POST['register']=='1' || $this->userin) {
             $user = new User();

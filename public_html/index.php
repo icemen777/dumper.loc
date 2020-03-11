@@ -1,8 +1,12 @@
 <?php
 session_start();
-require __DIR__ . '/../main/Mainclass.php';
-require __DIR__ . '/../main/User.php';
+
+spl_autoload_register(function ($class_name) {
+    include __DIR__ . '/../main/'. $class_name . '.php';
+});
+
 $app = new Mainclass();
+//var_dump($app);
 ?>
 <!DOCTYPE html>
 <html>

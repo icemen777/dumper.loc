@@ -37,23 +37,42 @@ class User
         }
     }
 
+    public function calcUserAge($date, $mounth, $year)
+    {
+        $newDate = new DateTime();
+        $oldDate = new DateTime("$year-$mounth-$date");
+        return  $newDate->diff($oldDate);
+    }
+
     function register($post) {
         $today = date("Y");
-        if (is_string($post['name']) && is_string($post['pass']) && is_string($post['birth'])) {
-            $nick = htmlspecialchars($post['name']);
-            $pass = htmlspecialchars($post['pass']);
+        if (is_string($post['name']) && is_string($post['pass'])) {
+            $nick = $post['name'];
+            $pass = $post['pass'];
             $pass = hash('md5', $pass);
-            $birth = htmlspecialchars($post['birth']);
 
-            $year = (date_parse_from_format("Y.n.j", $birth))['year'];
-            $age = (int)$today - (int)$year;
+
+            $day = (int)$post['day'];
+            $mounth = (int)$post['mounth'];
+            $year = (int)$post['year'];
+
+            $age = $this->calcUserAge($day, $mounth, $year)->y;
+
+            if(!checkdate($mounth,$day,$year)) {
+                $this->error = "Это был не такой длинный месяц!";
+                echo 'Too long month';
+                die();
+            }
+
+
             if ($age<6) {
                 echo 'Too Young'; die();
             }
             if ($age>100) {
                 echo 'Too old'; die();
             }
-            $this->userSave(['nick'=>$nick, 'pass' => $pass, 'birth' => $birth]);
+            $this->userSave(['nick'=>$nick, 'pass' => $pass, 'birth' => $age]);
+            return (true);
         }
     }
 
@@ -87,13 +106,13 @@ class User
 
 
 
-    function incCount($status)
+    function incCount($counter)
     {
-        $status++;
+        $counter++;
         $id = $_SESSION['userid'];
         $sql = "UPDATE user SET status=? WHERE id=?";
         $sth = $this->user->prepare($sql);
-        $test = $sth->execute([$status, $id]);
+        $test = $sth->execute([$counter, $id]);
     }
 
     function getCount()
