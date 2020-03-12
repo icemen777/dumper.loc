@@ -7,9 +7,6 @@
       <sourceFolder url="file://$MODULE_DIR$/public_html" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/Var_damper_exampel" />
-      <excludeFolder url="file://$MODULE_DIR$/Var_damper_exampel/vendor/composer" />
-      <excludeFolder url="file://$MODULE_DIR$/Var_damper_exampel/vendor/symfony/polyfill-mbstring" />
-      <excludeFolder url="file://$MODULE_DIR$/Var_damper_exampel/vendor/symfony/var-dumper" />
       <excludeFolder url="file://$MODULE_DIR$/vitoMonte_test-master" />
     </content>
     <orderEntry type="inheritedJdk" />
